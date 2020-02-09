@@ -16,8 +16,8 @@ module.exports = {
     addQuestion: (req, res) => {
         const id_question = uuid().split('-')[0]
         const { id_user } = req.user
-        const { question } = req.body
-        const data = { id_question, question, id_user }
+        const { question, question_order } = req.body
+        const data = { id_question, question, question_order, id_user }
 
         model.addQuestion(data)
             .then(result => {
@@ -31,8 +31,8 @@ module.exports = {
     editQuestion: (req, res) => {
         const id_question = req.params.id_question
         const { id_user } = req.user
-        const { question } = req.body
-        const data = { question, id_user}
+        const { question, question_order } = req.body
+        const data = { question, question_order, id_user}
 
         model.editQuestion(data, id_question)
             .then(result => {

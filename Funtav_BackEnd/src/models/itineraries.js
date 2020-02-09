@@ -1,13 +1,9 @@
 const db = require('../configs/db')
 
-const select = 'SELECT question.id_question, question.question, question.id_user, user.name AS question_by'
-
 module.exports = {
-    getQuestion: () => {
+    getItineraries: () => {
         return new Promise ((resolve, reject) =>{
-            db.query(`${select} FROM question
-            LEFT JOIN user ON question.id_user = user.id_user
-            `, (err, response) =>{
+            db.query(`SELECT * FROM itineraries`, (err, response) =>{
                 if (!err) {
                     resolve (response)
                 }else{
@@ -16,9 +12,9 @@ module.exports = {
             })
         })
     },
-    addQuestion: (data) => {
+    addItineraries: (data) => {
         return new Promise ((resolve, reject) =>{
-            db.query('INSERT INTO question SET ?', data, (err, response) =>{
+            db.query('INSERT INTO itineraries SET ?', data, (err, response) =>{
                 if (!err) {
                     resolve (response)
                 }else{
@@ -27,9 +23,9 @@ module.exports = {
             })
         })
     },
-    editQuestion: (data, id_question) => {
+    editItineraries: (data, id_itineraries) => {
         return new Promise((resolve, reject) => {
-          db.query('UPDATE question SET ? WHERE id_question = ?', [data, id_question], (err, result) => {
+          db.query('UPDATE itineraries SET ? WHERE id_itineraries = ?', [data, id_itineraries], (err, result) => {
             if (!err) {
               resolve(result)
             } else {
@@ -38,9 +34,9 @@ module.exports = {
           })
         })
       },
-    deleteQuestion: (id_question) => {
+    deleteItineraries: (id_itineraries) => {
         return new Promise((resolve, reject) => {
-          db.query('DELETE FROM question WHERE id_question = ?', id_question, (err, result) => {
+          db.query('DELETE FROM itineraries WHERE id_itineraries = ?', id_itineraries, (err, result) => {
             if (!err) {
               resolve(result)
             } else {
