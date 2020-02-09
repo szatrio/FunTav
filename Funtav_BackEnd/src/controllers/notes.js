@@ -24,8 +24,8 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itrns_custom,
-            id_itrns_package
+            id_itnrs_custom,
+            id_itnrs_package
         } = req.body
         const data = {
             id_notes,
@@ -37,8 +37,8 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itrns_custom,
-            id_itrns_package
+            id_itnrs_custom,
+            id_itnrs_package
         }
 
         model.addNotes(data)
@@ -61,8 +61,8 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itrns_custom,
-            id_itrns_package
+            id_itnrs_custom,
+            id_itnrs_package
         } = req.body
         const data = {
             budget,
@@ -73,8 +73,8 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itrns_custom,
-            id_itrns_package
+            id_itnrs_custom,
+            id_itnrs_package
         }
 
         model.editNotes(data, id_notes)
