@@ -1,20 +1,18 @@
-const model = require('../models/itnrsPackage')
+const model = require('../models/itnrsCustom')
 const helpers = require('../helpers/index')
+const moment = require('moment');
 
-const getDateEnd = (date, duration) => {
-    let dateEnd = date.split("-").slice(1).reverse().join("-") + "-" + (parseInt(date.split("-")[0]) + parseInt(duration))
-    return dateEnd
-}
-
-const getDiscount = (normal_price, discount) => {
-    let price = normal_price - (normal_price * discount / 100)
-    return price
+const getDuration = (start, end) => {
+    let dateStart = moment(start.split("-")),
+        dateEnd = moment(end.split("-")),
+        duration = dateEnd.diff(dateStart, 'days')
+    return duration
 }
 
 module.exports = {
-    getItnrsPackage: (_, res) => {
+    getItnrsCustom: (_, res) => {
         model
-            .getItnrsPackage()
+            .getItnrsCustom()
             .then(response => {
                 helpers.success(res, response)
             })
@@ -22,10 +20,10 @@ module.exports = {
                 console.log(err);
             });
     },
-    getItnrsPackageById: (req, res) => {
-        const { id_itnrs_package } = req.params
+    getItnrsCustomById: (req, res) => {
+        const {id_itnrs_custom} = req.params
         model
-            .getItnrsPackageById(id_itnrs_package)
+            .getItnrsCustomById(id_itnrs_custom)
             .then(response => {
                 helpers.success(res, response)
             })
@@ -33,36 +31,33 @@ module.exports = {
                 console.log(err);
             });
     },
-    addItnrsPackage: (req, res) => {
+    addItnrsCustom: (req, res) => {
         let {
-            id_itnrs_package,
+            id_itnrs_custom,
             origin,
             destination,
             date_start,
-            duration,
-            normal_price,
-            discount,
+            date_end,
             id_notes
         } = req.body
 
-        let date_end = getDateEnd(date_start, duration)
         date_start = date_start.split("-").reverse().join("-")
-        let price = getDiscount(normal_price, discount)
+        date_end = date_end.split("-").reverse().join("-")
+        let duration = getDuration(date_start, date_end)
 
+        
         const data = {
-            id_itnrs_package,
+            id_itnrs_custom,
             origin,
             destination,
             date_start,
             date_end,
             duration,
-            normal_price,
-            discount,
-            price,
+            date_sent: new Date(),
             id_notes
         }
 
-        model.addItnrsPackage(data)
+        model.addItnrsCustom(data)
             .then(result => {
                 res.json(result)
             })
@@ -71,21 +66,21 @@ module.exports = {
             })
 
     },
-    editItnrsPackage: (req, res) => {
-        const { id_itnrs_package } = req.params
+    editItnrsCustom: (req, res) => {
+        const { id_itnrs_custom } = req.params
+        const { id_user } = req.user
         let {
             origin,
             destination,
             date_start,
-            duration,
-            normal_price,
-            discount,
+            date_end,
+            price,
             id_notes
         } = req.body
 
-        let date_end = getDateEnd(date_start, duration)
         date_start = date_start.split("-").reverse().join("-")
-        let price = getDiscount(normal_price, discount)
+        date_end = date_end.split("-").reverse().join("-")
+        let duration = getDuration(date_start, date_end)
 
         const data = {
             origin,
@@ -93,12 +88,11 @@ module.exports = {
             date_start,
             date_end,
             duration,
-            normal_price,
-            discount,
             price,
+            id_user,
             id_notes
         }
-        model.editItnrsPackage(data, id_itnrs_package)
+        model.editItnrsCustom(data, id_itnrs_custom)
             .then(result => {
                 res.json(result)
             })
@@ -106,10 +100,10 @@ module.exports = {
                 console.log(err)
             })
     },
-    deleteItnrsPackage: (req, res) => {
-        const id_itnrs_package = req.params.id_itnrs_package
+    deleteItnrsCustom: (req, res) => {
+        const id_itnrs_custom = req.params.id_itnrs_custom
 
-        model.deleteItnrsPackage(id_itnrs_package)
+        model.deleteItnrsCustom(id_itnrs_custom)
             .then(result => {
                 res.json(result)
             })

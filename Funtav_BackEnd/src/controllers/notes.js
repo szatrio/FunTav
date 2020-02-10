@@ -1,6 +1,5 @@
 const model = require('../models/notes')
 const helpers = require('../helpers/index')
-const uuid = require('uuid/v4')
 
 module.exports = {
     getNotes: (_, res) => {
@@ -14,8 +13,8 @@ module.exports = {
             });
     },
     addNotes: (req, res) => {
-        const id_notes = uuid().split('-')[0]
         const { 
+            id_notes,
             budget,
             transportation,
             occupancy,
@@ -23,9 +22,7 @@ module.exports = {
             schedule,
             focus,
             people,
-            medical_rec,
-            id_itnrs_custom,
-            id_itnrs_package
+            medical_rec
         } = req.body
         const data = {
             id_notes,
@@ -37,8 +34,6 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itnrs_custom,
-            id_itnrs_package
         }
 
         model.addNotes(data)
@@ -61,8 +56,6 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itnrs_custom,
-            id_itnrs_package
         } = req.body
         const data = {
             budget,
@@ -73,8 +66,6 @@ module.exports = {
             focus,
             people,
             medical_rec,
-            id_itnrs_custom,
-            id_itnrs_package
         }
 
         model.editNotes(data, id_notes)

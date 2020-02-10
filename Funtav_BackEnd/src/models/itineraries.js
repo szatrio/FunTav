@@ -12,6 +12,17 @@ module.exports = {
             })
         })
     },
+    getItinerariesById: (id) => {
+      return new Promise ((resolve, reject) =>{
+          db.query(`SELECT * FROM itineraries WHERE id_itineraries='${id}'`, (err, response) =>{
+              if (!err) {
+                  resolve (response)
+              }else{
+                  reject (err)
+              }
+          })
+      })
+  },
     addItineraries: (data) => {
         return new Promise ((resolve, reject) =>{
             db.query('INSERT INTO itineraries SET ?', data, (err, response) =>{
