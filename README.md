@@ -14,7 +14,7 @@
  
 ## Introduction
 
-FunTav is specialized on making custom tour and travel inquiries based on customer’s. Which this project is Web App for Funtav
+<p>FunTav is specialized on making custom tour and travel inquiries based on customer’s.</p>
 ---
 
 ## Tools
