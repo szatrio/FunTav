@@ -15,7 +15,6 @@
 ## Introduction
 
 <p>FunTav is specialized on making custom tour and travel inquiries based on customer’s.</p>
----
 
 ## Tools
 
