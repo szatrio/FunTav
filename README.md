@@ -1,7 +1,7 @@
 # FunTav
 
 <p align="center">
-    <img src="../public/funtav_logo.png" height="120px" width="240px">  
+    <img src="./public/funtav_logo.png" height="120px" width="240px">  
 </p>
 
 ## Table of Contents
@@ -55,8 +55,10 @@ $ npm start
 ## Database Design 
 
 <p align="center">
-    <img src="../public/funtav.png">  
+    <img src="./public/funtav.png">  
 </p>
+
+<!-- ![picture](img/abc.png) -->
 
 ## Dependencies
 
