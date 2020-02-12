@@ -13,6 +13,7 @@
 ---
  
 ## Introduction
+
 FunTav is specialized on making custom tour and travel inquiries based on customer’s. Which this project is Web App for Funtav
 ---
 
@@ -52,7 +53,7 @@ $ npm start
 ```
 --- 
 
-## Database Design 
+## DatabaseDesign 
 
 <p align="center">
     <img src="./public/funtav.png">  
