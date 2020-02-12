@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import auth from './auth'
+import itnrsPackage from './itnrsPackage'
 
 const rootReducer = combineReducers({
-  auth: auth
+  itnrsPackage: itnrsPackage
 })
 
 export default rootReducer

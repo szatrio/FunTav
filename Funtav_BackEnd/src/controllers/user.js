@@ -145,6 +145,7 @@ module.exports = {
       .then(resultQuery => {
         const id_user = resultQuery[0].id_user
         const name = resultQuery[0].name
+        const role = resultQuery[0].role
         const passwordHash = resultQuery[0].password
         const password = req.body.password
 
@@ -158,6 +159,7 @@ module.exports = {
               token,
               id_user,
               name,
+              role
             }
           })
         } else {

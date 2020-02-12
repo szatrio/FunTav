@@ -1,27 +1,27 @@
 const initialState = {
     isLoading: false,
     isError: false,
-    userData: [],
+    itnrsPackage: [],
 }
 
-const AuthReducer = (state = initialState, action) => {
+const ItnrsPackageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "LOGIN_USER_PENDING":
+        case "FETCH_ITNRS_PACKAGE_PENDING":
             return {
                 ...state,
                 isError: false,
                 isLoading: true
             }
-        case "LOGIN_USER_REJECTED":
+        case "FETCH_ITNRS_PACKAGE_REJECTED":
             return {
                 ...state,
                 isLoading: false,
                 isError: true
             }
-        case "LOGIN_USER_FULFILLED":
+        case "FETCH_ITNRS_PACKAGE":
             return {
                 ...state,
-                userData: action.payload,
+                itnrsPackage: action.payload,
                 isError: false,
                 isLoading: false
             }
@@ -30,4 +30,4 @@ const AuthReducer = (state = initialState, action) => {
     }
 }
 
-export default AuthReducer
+export default ItnrsPackageReducer

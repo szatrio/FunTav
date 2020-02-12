@@ -8,11 +8,9 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import '../styles/Login.css'
-
-import { connect } from 'react-redux'
-import { LoginAction } from '../../public/redux/actions/auth'
-import { useDispatch, useSelector } from "react-redux";
+import '../styles/global.css'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 const Copyright = () => {
   return (
@@ -60,18 +58,30 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const classes = useStyles();
-  
+  const history = useHistory()
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(email, password, "ini email")
 
   const submitValue = () => {
-  const formDetails = {
-        'Email' : email,
-        'Password' : password
-    }
-  console.log(formDetails);
-}
+    const formDetails = {
+          'email' : email,
+          'password' : password
+      }
+    let url = `http://${process.env.REACT_APP_BACKEND_HOST}:${process.env.REACT_APP_BACKEND_PORT}/`
+    axios.post(url + 'user/login', formDetails)
+    .then(res => {
+      history.push("/")
+      localStorage.setItem('email', res.data.data.email)
+      localStorage.setItem('token', res.data.data.token)
+      localStorage.setItem('id_user', res.data.data.id_user)
+      localStorage.setItem('name', res.data.data.name)
+      localStorage.setItem('role', res.data.data.role)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -83,7 +93,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -109,7 +119,6 @@ const Login = () => {
               onChange={e => setPassword(e.target.value)}
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
@@ -135,8 +144,6 @@ const Login = () => {
   );
 }
 
-const { auth } = useSelector(state => ({
-  auth: state.auth,
-}));
+
 
 export default Login
